@@ -1,18 +1,16 @@
-package ru.practicum.ewm.category.dto;
+package ru.practicum.ewm.event.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewCategoryDto {
-    @NotBlank
-    private String name;
+public class Location {
+    private Float lat;
+    private Float lon;
 
 }

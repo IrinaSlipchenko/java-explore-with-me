@@ -1,14 +1,10 @@
 package ru.practicum.ewm.category.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.category.CategoryMapper;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.category.dto.CategoryDto;
-import ru.practicum.ewm.category.dto.NewCategoryDto;
 import ru.practicum.ewm.category.model.Category;
+import ru.practicum.ewm.category.service.CategoryMapper;
 import ru.practicum.ewm.category.service.CategoryServiceImpl;
 
 import javax.validation.Valid;
@@ -21,9 +17,21 @@ public class AdminCategoryController {
     private final CategoryServiceImpl categoryService;
 
     @PostMapping
-    public CategoryDto create(@Valid @RequestBody NewCategoryDto newCategoryDto) {
-        Category category = categoryMapper.toCategory(newCategoryDto);
-        return categoryMapper.toCategoryDto(categoryService.create(category));
+    public CategoryDto create(@Valid @RequestBody CategoryDto categoryDto) {
+        Category category = categoryMapper.toCategory(categoryDto);
+        return categoryMapper.toDto(categoryService.create(category));
+    }
+
+    @PatchMapping
+    public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto) {
+        Category category = categoryMapper.toCategory(categoryDto);
+        return categoryMapper.toDto(categoryService.update(category));
+    }
+
+    @DeleteMapping("/{catId}")
+    public void delete(@PathVariable Long catId) {
+        categoryService.delete(catId);
+
     }
 
 
