@@ -13,7 +13,7 @@ import ru.practicum.ewm.user.service.UserServiceImpl;
 @RestController
 @RequestMapping("/admin/users")
 @RequiredArgsConstructor
-public class UserController {
+public class AdminUserController {
 
     private final UserServiceImpl userService;
     private final UserMapper userMapper;

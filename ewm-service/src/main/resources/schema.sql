@@ -1,14 +1,14 @@
 CREATE TABLE categories
 (
     id   BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE users
 (
     id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name  VARCHAR NOT NULL,
-    email VARCHAR NOT NULL
+    name  TEXT NOT NULL,
+    email TEXT NOT NULL
 
 );
 
@@ -17,9 +17,9 @@ CREATE TABLE events
     id                BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     initiator_id      BIGINT REFERENCES users (id),
     category_id       BIGINT REFERENCES categories (id),
-    title             VARCHAR(120) NOT NULL,
-    annotation        VARCHAR(2000),
-    description       VARCHAR(7000),
+    title             TEXT NOT NULL,
+    annotation        TEXT,
+    description       TEXT,
     created           TIMESTAMP,
     published         TIMESTAMP,
     eventDate         TIMESTAMP,
@@ -28,7 +28,7 @@ CREATE TABLE events
     paid              BOOLEAN,
     participantLimit  INT,
     requestModeration BOOLEAN,
-    state             VARCHAR(20)
+    state             TEXT
 );
 
 CREATE TABLE requests
@@ -37,7 +37,7 @@ CREATE TABLE requests
     event_id     BIGINT REFERENCES events (id),
     requester_id BIGINT REFERENCES users (id),
     created      TIMESTAMP,
-    status       VARCHAR(20)
+    status       TEXT
 
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE compilations
 (
     id     BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     pinned BOOLEAN,
-    title  VARCHAR
+    title  TEXT
 );
 
 CREATE TABLE compilations_events
