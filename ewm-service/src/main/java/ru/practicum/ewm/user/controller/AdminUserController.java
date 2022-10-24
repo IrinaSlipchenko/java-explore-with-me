@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.user.dto.UserDto;
 import ru.practicum.ewm.user.model.User;
 import ru.practicum.ewm.user.service.UserMapper;
-import ru.practicum.ewm.user.service.UserServiceImpl;
+import ru.practicum.ewm.user.service.UserService;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminUserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final UserMapper userMapper;
 
     @PostMapping

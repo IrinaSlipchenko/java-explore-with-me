@@ -14,14 +14,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl {
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
     private final CategoryRepository categoryRepository;
 
+    @Override
     public Category create(Category category) {
         return save(category);
     }
 
+    @Override
     public Category update(Category category) {
         Category oldCategory = getById(category.getId());
 
@@ -38,6 +40,7 @@ public class CategoryServiceImpl {
 
     }
 
+    @Override
     public void delete(Long catId) {
         // TODO Обратите внимание: с категорией не должно быть связано ни одного события.
 
@@ -45,11 +48,13 @@ public class CategoryServiceImpl {
 
     }
 
+    @Override
     public List<Category> getAll(Integer from, Integer size) {
         Pageable pageable = OffsetLimitPageable.of(from, size);
         return categoryRepository.findAll(pageable).getContent();
     }
 
+    @Override
     public Category getById(Long catId) {
         return categoryRepository.findById(catId)
                 .orElseThrow(() -> new NotFoundException("Category not found"));
