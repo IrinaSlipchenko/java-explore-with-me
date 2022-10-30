@@ -14,27 +14,17 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventDtoOutput {
+public class EventShortDto {
     private Long id;
     private String title;
     private CategoryDto category;
     private UserShortDto initiator;
     private String annotation;
-    private String description;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdOn;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime publishedOn;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate;
-    private Location location;
-    private Long participantLimit;
     private Boolean paid;
-    private Boolean requestModeration;
-    private State state;
     private Long views;
     // Количество одобренных заявок на участие в данном событии
     private Long confirmedRequests;
-
 
 }

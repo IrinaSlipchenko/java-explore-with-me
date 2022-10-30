@@ -13,4 +13,5 @@ public class Location {
     private Float lat;
     private Float lon;
 
+    // Широта и долгота места проведения события
 }

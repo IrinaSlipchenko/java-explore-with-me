@@ -5,4 +5,5 @@ import ru.practicum.ewm.event.model.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
+
 }

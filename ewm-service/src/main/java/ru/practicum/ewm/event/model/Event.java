@@ -31,7 +31,9 @@ public class Event {
     @JoinColumn(name = "initiator_id")
     private User initiator;
     private String title;
+    @Column(length = 1000)
     private String annotation;
+    @Column(length = 1000)
     private String description;
     @CreationTimestamp
     private LocalDateTime created;
@@ -40,7 +42,7 @@ public class Event {
     private Float lat;
     private Float lon;
     private Boolean paid;
-    private Long participantLimit;
+    private Long participantLimit; // 100
     private Boolean requestModeration;
     @Enumerated(value = EnumType.STRING)
     private State state;
