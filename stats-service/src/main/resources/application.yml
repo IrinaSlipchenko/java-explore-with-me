@@ -1,3 +1,4 @@
+
 spring:
   jpa:
     show-sql: true
@@ -6,3 +7,6 @@ spring:
     url: jdbc:h2:mem:ewm
     username: test
     password: test
+
+server:
+  port: 9090

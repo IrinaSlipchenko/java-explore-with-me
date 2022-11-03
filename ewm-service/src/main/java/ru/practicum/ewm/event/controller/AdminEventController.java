@@ -38,7 +38,7 @@ public class AdminEventController {
     public EventDtoOutput update(@PathVariable Long eventId,
                                  @RequestBody EventDtoInput eventDtoInput) {
         Event event = eventMapper.toEvent(eventDtoInput);
-        return eventMapper.toDto(eventService.updateEvent(event, eventId));
+        return eventMapper.toDto(eventService.updateEventFromAdmin(event, eventId));
     }
 
     @GetMapping
@@ -55,7 +55,7 @@ public class AdminEventController {
                                             @Positive @RequestParam(defaultValue = "10") Integer size) {
 
         return eventMapper.toDto(
-                eventService.searchEvents(
-                        users, states, categories, rangeStart, rangeEnd, from, size));
+                eventService.getEventByParameters(users, states, categories, rangeStart, rangeEnd, from, size,
+                        null, null, null, null));
     }
 }

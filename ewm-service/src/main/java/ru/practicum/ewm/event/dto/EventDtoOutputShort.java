@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventShortDto {
+public class EventDtoOutputShort {
     private Long id;
     private String title;
     private CategoryDto category;

@@ -62,13 +62,40 @@ public class RequestServiceImpl {
     }
 
     public ParticipationRequest cancelRequest(Long userId, Long requestId) {
-        ParticipationRequest request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new NotFoundException("request not exist id= " + requestId));
+        ParticipationRequest request = getById(requestId);
 
         if (request.getRequester().getId().equals(userId)) {
             request.setStatus(Status.CANCELED);
             return requestRepository.save(request);
         }
         throw new ConflictException("request can only be canceled by its creator", "");
+    }
+
+    public ParticipationRequest confirmed(Long userId, Long eventId, Long reqId) {
+        ParticipationRequest request = getById(reqId);
+        Event event = request.getEvent();
+
+        if(event.getId().equals(eventId) && event.getInitiator().getId().equals(userId) &&
+        event.getRequestModeration() && event.getParticipantLimit() > 0){
+            request.setStatus(Status.CONFIRMED);
+            return requestRepository.save(request);
+        }
+        throw new ConflictException("the request has the right to confirm the event creator", "");
+    }
+
+    public ParticipationRequest rejected(Long userId, Long eventId, Long reqId) {
+        ParticipationRequest request = getById(reqId);
+        Event event = request.getEvent();
+
+        if(event.getId().equals(eventId) && event.getInitiator().getId().equals(userId)){
+            request.setStatus(Status.REJECTED);
+            return requestRepository.save(request);
+        }
+        throw new ConflictException("the request has the right to reject the event creator", "");
+    }
+
+    private ParticipationRequest getById(Long requestId){
+        return requestRepository.findById(requestId)
+                .orElseThrow(() -> new NotFoundException("request not exist id= " + requestId));
     }
 }

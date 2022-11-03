@@ -1,5 +1,6 @@
 package ru.practicum.ewm.event.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +9,13 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.event.dto.State;
+import ru.practicum.ewm.request.model.ParticipationRequest;
 import ru.practicum.ewm.user.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -46,6 +49,10 @@ public class Event {
     private Boolean requestModeration;
     @Enumerated(value = EnumType.STRING)
     private State state;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "event")
+    private Set<ParticipationRequest> requests;
 
     @Override
     public boolean equals(Object obj) {

@@ -37,7 +37,7 @@ CREATE TABLE requests
     event_id     BIGINT REFERENCES events (id),
     requester_id BIGINT REFERENCES users (id),
     created      TIMESTAMP,
-    status       TEXT
+    status       VARCHAR
 
 );
 

@@ -32,6 +32,7 @@ public class AdminCompilationController {
     @PatchMapping("/{compId}/events/{eventId}")
     public void addEventInCompilation(@PathVariable Long compId,
                                       @PathVariable Long eventId) {
+
         compilationService.addEventInCompilation(compId, eventId);
     }
 
@@ -39,17 +40,19 @@ public class AdminCompilationController {
     public void delEventFromCompilation(@PathVariable Long compId,
                                         @PathVariable Long eventId) {
 
+        compilationService.delEventFromCompilation(compId, eventId);
     }
 
     @PatchMapping("/{compId}/pin")
-    public void pinCompilation(@PathVariable Long compId) {
+    public void attachedFromMain(@PathVariable Long compId) {
 
-        compilationService.pinCompilation(compId);
+        compilationService.attachedFromMain(compId);
     }
 
     @DeleteMapping("/{compId}/pin")
-    public void unpinCompilation(@PathVariable Long compId) {
+    public void releasedFromMain(@PathVariable Long compId) {
 
+        compilationService.releasedFromMain(compId);
     }
 
 }

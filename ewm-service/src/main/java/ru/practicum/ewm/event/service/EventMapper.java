@@ -3,7 +3,9 @@ package ru.practicum.ewm.event.service;
 import org.mapstruct.*;
 import ru.practicum.ewm.category.service.CategoryFactory;
 import ru.practicum.ewm.event.dto.EventDtoInput;
+import ru.practicum.ewm.event.dto.EventDtoInputOnUpdate;
 import ru.practicum.ewm.event.dto.EventDtoOutput;
+import ru.practicum.ewm.event.dto.EventDtoOutputShort;
 import ru.practicum.ewm.event.model.Event;
 import ru.practicum.ewm.user.service.UserService;
 
@@ -22,6 +24,9 @@ public interface EventMapper {
     @Mapping(target = "lon", source = "eventDtoInput.location.lon")
     Event toEvent(EventDtoInput eventDtoInput);
 
+    @Mapping(target = "category", source = "eventDtoInput.categoryId")
+    Event toEvent(EventDtoInputOnUpdate eventDtoInput);
+
     @Mapping(target = "createdOn", source = "created")
     @Mapping(target = "publishedOn", source = "published")
     @Mapping(target = "location.lat", source = "lat")
@@ -29,6 +34,8 @@ public interface EventMapper {
     EventDtoOutput toDto(Event event);
 
     List<EventDtoOutput> toDto(List<Event> events);
+
+    List<EventDtoOutputShort> toDtoShort(List<Event> events);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEvent(Event newEvent, @MappingTarget Event oldEvent);
