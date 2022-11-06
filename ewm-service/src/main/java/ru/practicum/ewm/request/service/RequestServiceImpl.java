@@ -75,8 +75,8 @@ public class RequestServiceImpl {
         ParticipationRequest request = getById(reqId);
         Event event = request.getEvent();
 
-        if(event.getId().equals(eventId) && event.getInitiator().getId().equals(userId) &&
-        event.getRequestModeration() && event.getParticipantLimit() > 0){
+        if (event.getId().equals(eventId) && event.getInitiator().getId().equals(userId) &&
+                event.getRequestModeration() && event.getParticipantLimit() > 0) {
             request.setStatus(Status.CONFIRMED);
             return requestRepository.save(request);
         }
@@ -87,14 +87,14 @@ public class RequestServiceImpl {
         ParticipationRequest request = getById(reqId);
         Event event = request.getEvent();
 
-        if(event.getId().equals(eventId) && event.getInitiator().getId().equals(userId)){
+        if (event.getId().equals(eventId) && event.getInitiator().getId().equals(userId)) {
             request.setStatus(Status.REJECTED);
             return requestRepository.save(request);
         }
         throw new ConflictException("the request has the right to reject the event creator", "");
     }
 
-    private ParticipationRequest getById(Long requestId){
+    private ParticipationRequest getById(Long requestId) {
         return requestRepository.findById(requestId)
                 .orElseThrow(() -> new NotFoundException("request not exist id= " + requestId));
     }

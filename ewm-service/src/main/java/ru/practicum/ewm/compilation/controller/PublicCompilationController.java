@@ -20,15 +20,15 @@ public class PublicCompilationController {
 
     @GetMapping
     public List<CompilationDtoOutput> getCompilations(@Valid
-            @RequestParam (name = "pinned", required = false, defaultValue = "true") Boolean pinned,
-            @PositiveOrZero @RequestParam (name = "from", required = false, defaultValue = "0") Integer from,
-            @Positive @RequestParam (name = "size", required = false, defaultValue = "10") Integer size){
+                                                      @RequestParam(name = "pinned", required = false, defaultValue = "true") Boolean pinned,
+                                                      @PositiveOrZero @RequestParam(name = "from", required = false, defaultValue = "0") Integer from,
+                                                      @Positive @RequestParam(name = "size", required = false, defaultValue = "10") Integer size) {
 
         return compilationMapper.toDto(compilationService.getCompilations(pinned, from, size));
     }
 
     @GetMapping("/{compId}")
-    public CompilationDtoOutput getById(@PathVariable Long compId){
+    public CompilationDtoOutput getById(@PathVariable Long compId) {
 
         return compilationMapper.toDto(compilationService.getById(compId));
     }

@@ -30,18 +30,19 @@ public class StatsServiceImpl {
 
         log.info("Получен ответ от сервера статистики {}", endpointHit2);
     }
-    public Long getHits(Long id){
+
+    public Long getHits(Long id) {
         List<ViewStatsDto> stats;
         try {
             stats = client.getStats(
                     LocalDateTime.of(2020, 1, 1, 0, 0).format(formatter),
                     LocalDateTime.now().format(formatter), new String[]{"/events/" + id}, false);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0L;
         }
 
-        if(stats == null || stats.isEmpty()){
+        if (stats == null || stats.isEmpty()) {
             return 0L;
         }
 

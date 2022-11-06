@@ -61,7 +61,7 @@ public class CompilationServiceImpl {
 
     public Compilation getById(Long compId) {
         return compilationRepository.findById(compId)
-                .orElseThrow(()-> new NotFoundException("compilation not found id= " + compId));
+                .orElseThrow(() -> new NotFoundException("compilation not found id= " + compId));
     }
 
     public List<Compilation> getCompilations(Boolean pinned, Integer from, Integer size) {

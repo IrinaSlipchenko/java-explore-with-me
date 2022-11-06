@@ -43,8 +43,8 @@ public class PrivateEventController {
 
     @GetMapping
     public List<EventDtoOutput> getAllByUserId(@PathVariable Long userId,
-                                               @RequestParam (defaultValue = "0")Integer from,
-                                               @RequestParam (defaultValue = "10")Integer size){
+                                               @RequestParam(defaultValue = "0") Integer from,
+                                               @RequestParam(defaultValue = "10") Integer size) {
 
         return eventMapper.toDto(eventService.getAllByUserId(userId, from, size));
     }

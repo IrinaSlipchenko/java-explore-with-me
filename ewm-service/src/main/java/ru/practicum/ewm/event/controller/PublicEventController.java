@@ -39,13 +39,13 @@ public class PublicEventController {
                                                LocalDateTime rangeStart,
                                                @RequestParam(required = false) @DateTimeFormat(
                                                        iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd HH:mm:ss")
-                                                   LocalDateTime rangeEnd,
+                                               LocalDateTime rangeEnd,
                                                @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                @Positive @RequestParam(defaultValue = "10") Integer size,
-                                               @RequestParam (required = false) Sort sort,
-                                               @RequestParam (defaultValue = "false") Boolean onlyAvailable,
-                                               @RequestParam (required = false) Boolean paid,
-                                               @RequestParam (required = false) String text){
+                                               @RequestParam(required = false) Sort sort,
+                                               @RequestParam(defaultValue = "false") Boolean onlyAvailable,
+                                               @RequestParam(required = false) Boolean paid,
+                                               @RequestParam(required = false) String text) {
         return eventMapper.toDtoShort(
                 eventService.getEventByParameters(null, null, categories, rangeStart, rangeEnd,
                         from, size, sort, onlyAvailable, paid, text));

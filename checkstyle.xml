@@ -180,6 +180,10 @@
 					  value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR, LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF "/>
 			<metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
 		</module>
+		<module name="SuppressionFilter">
+			<property name="file" value="suppressions.xml"/>
+			<property name="optional" value="false"/>
+		</module>
 		<module name="AnnotationLocation">
 			<property name="id" value="AnnotationLocationMostCases"/>
 			<property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF"/>
@@ -250,4 +254,5 @@
 	</module>
 	<!--	<module name="NewlineAtEndOfFile"/>-->
 	<module name="SuppressWarningsFilter"/>
+
 </module>

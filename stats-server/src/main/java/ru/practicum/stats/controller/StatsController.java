@@ -38,7 +38,7 @@ public class StatsController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE,
                     pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
             @RequestParam(required = false) List<String> uris,
-            @RequestParam (defaultValue = "false") Boolean unique) {
+            @RequestParam(defaultValue = "false") Boolean unique) {
 
         return hitMapper.toStats(hitService.getStats(start, end, uris, unique));
 

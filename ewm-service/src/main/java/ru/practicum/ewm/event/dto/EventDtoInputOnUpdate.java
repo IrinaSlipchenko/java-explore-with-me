@@ -33,6 +33,6 @@ public class EventDtoInputOnUpdate {
     private Boolean paid;              // Нужно ли оплачивать участие в событии
 
     private Long participantLimit;     // Ограничение на количество участников.
-                                       // Значение 0 - означает отсутствие ограничения
+    // Значение 0 - означает отсутствие ограничения
 
 }

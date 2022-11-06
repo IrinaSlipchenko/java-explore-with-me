@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
     public Event updateEventFromCreator(Event event, Long userId) {
         Event oldEvent = getById(event.getId());
 
-        if(userId.equals(oldEvent.getInitiator().getId())){
+        if (userId.equals(oldEvent.getInitiator().getId())) {
             eventMapper.updateEvent(event, oldEvent);
             return eventRepository.save(oldEvent);
         }
@@ -112,42 +112,42 @@ public class EventServiceImpl implements EventService {
         List<Predicate> predicates = new ArrayList<>();
         List<Event> events;
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Event>  criteria = cb.createQuery(Event.class);
+        CriteriaQuery<Event> criteria = cb.createQuery(Event.class);
         Root<Event> eventRoot = criteria.from(Event.class);
 
-        if(users != null && !users.isEmpty()){
+        if (users != null && !users.isEmpty()) {
             predicates.add(cb.in(eventRoot.get("initiator").get("id")).value(users));
         }
-        if(states != null && !states.isEmpty()){
+        if (states != null && !states.isEmpty()) {
             predicates.add(cb.in(eventRoot.get("state")).value(states));
         }
-        if(categories != null && !categories.isEmpty()){
+        if (categories != null && !categories.isEmpty()) {
             predicates.add(cb.in(eventRoot.get("category").get("id")).value(categories));
         }
-        if(rangeStart != null){
+        if (rangeStart != null) {
             predicates.add(cb.greaterThan(eventRoot.get("eventDate"), rangeStart));
         }
-        if(rangeEnd != null){
+        if (rangeEnd != null) {
             predicates.add(cb.lessThan(eventRoot.get("eventDate"), rangeEnd));
         }
-        if(text != null){
+        if (text != null) {
             predicates.add(cb.or(
                     cb.like(cb.upper(eventRoot.get("annotation")), "%" + text.toUpperCase() + "%"),
                     cb.like(cb.upper(eventRoot.get("description")), "%" + text.toUpperCase() + "%")
             ));
         }
-        if(paid != null){
+        if (paid != null) {
             predicates.add(cb.equal(eventRoot.get("paid"), paid));
         }
 
-        if(sort == Sort.EVENT_DATE){
+        if (sort == Sort.EVENT_DATE) {
             events = entityManager.createQuery(criteria.select(eventRoot)
                             .where(predicates.toArray(new Predicate[]{}))
                             .orderBy(cb.asc(eventRoot.get("eventDate"))))
                     .setFirstResult(from)
                     .setMaxResults(size)
                     .getResultList();
-        }else {
+        } else {
             events = entityManager.createQuery(criteria.select(eventRoot)
                             .where(predicates.toArray(new Predicate[]{})))
                     .setFirstResult(from)
@@ -155,7 +155,7 @@ public class EventServiceImpl implements EventService {
                     .getResultList();
         }
 
-        if (onlyAvailable != null && onlyAvailable){
+        if (onlyAvailable != null && onlyAvailable) {
             return events.stream()
                     .filter(event -> {
                         long count = event.getRequests().stream()
@@ -194,10 +194,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> getAllByUserId(Long userId, Integer from, Integer size) {
         Pageable pageable = OffsetLimitPageable.of(from, size);
 
-        return eventRepository.findAllByInitiatorId(userId,pageable);
+        return eventRepository.findAllByInitiatorId(userId, pageable);
     }
 
-    private void setViews(Event event){
+    private void setViews(Event event) {
         Long hits = statsService.getHits(event.getId());
         event.setViews(hits);
     }

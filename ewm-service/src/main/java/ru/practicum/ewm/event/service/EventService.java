@@ -21,10 +21,10 @@ public interface EventService {
     Event updateEventFromCreator(Event event, Long userId);
 
     List<Event> getEventByParameters(List<Long> users, List<State> states,
-                                            List<Long> categories,
-                                            LocalDateTime rangeStart, LocalDateTime rangeEnd,
-                                            Integer from, Integer size, Sort sort, Boolean onlyAvailable,
-                                            Boolean paid, String text);
+                                     List<Long> categories,
+                                     LocalDateTime rangeStart, LocalDateTime rangeEnd,
+                                     Integer from, Integer size, Sort sort, Boolean onlyAvailable,
+                                     Boolean paid, String text);
 
     Event findById(Long id);
 
