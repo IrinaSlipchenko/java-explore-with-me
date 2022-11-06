@@ -10,7 +10,7 @@ import ru.practicum.ewm.statistics.dto.ViewStatsDto;
 
 import java.util.List;
 
-@FeignClient(value = "stats", url = "${feign.url}")
+@FeignClient(value = "stats", url = "${feign.client.url}")
 public interface StatsClient {
 
     @GetMapping("/stats?start={start}&end={end}&uris={uris}&unique={unique}")
@@ -18,7 +18,7 @@ public interface StatsClient {
                                 @PathVariable String[] uris, @PathVariable boolean unique);
 
     @PostMapping("/hit")
-    void setStat(@RequestBody EndpointHitDto endpointHit);
+    EndpointHitDto setStat(@RequestBody EndpointHitDto endpointHit);
 }
 
 

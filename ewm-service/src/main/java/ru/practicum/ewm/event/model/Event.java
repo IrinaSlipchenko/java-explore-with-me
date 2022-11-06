@@ -53,6 +53,8 @@ public class Event {
     @JsonIgnore
     @OneToMany(mappedBy = "event")
     private Set<ParticipationRequest> requests;
+    @Transient
+    private Long views;
 
     @Override
     public boolean equals(Object obj) {

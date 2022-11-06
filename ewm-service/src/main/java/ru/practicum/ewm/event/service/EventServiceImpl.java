@@ -11,6 +11,7 @@ import ru.practicum.ewm.event.repository.EventRepository;
 import ru.practicum.ewm.exception.NotFoundException;
 import ru.practicum.ewm.exception.ValidationException;
 import ru.practicum.ewm.request.dto.Status;
+import ru.practicum.ewm.statistics.service.StatsServiceImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -31,6 +32,7 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final EntityManager entityManager;
+    private final StatsServiceImpl statsService;
 
     @Override
     public Event createEvent(Event event) {
@@ -47,6 +49,7 @@ public class EventServiceImpl implements EventService {
         Event event = getById(eventId);
 
         if (userId.equals(event.getInitiator().getId())) {
+            setViews(event);
             return event;
         }
         throw new NotFoundException("user Id not equal initiator Id");
@@ -170,6 +173,7 @@ public class EventServiceImpl implements EventService {
         Event event = getById(id);
 
         if (event.getState().equals(State.PUBLISHED)) {
+            setViews(event);
             return event;
         }
         throw new ValidationException("wrong state or wrong event id");
@@ -191,5 +195,10 @@ public class EventServiceImpl implements EventService {
         Pageable pageable = OffsetLimitPageable.of(from, size);
 
         return eventRepository.findAllByInitiatorId(userId,pageable);
+    }
+
+    private void setViews(Event event){
+        Long hits = statsService.getHits(event.getId());
+        event.setViews(hits);
     }
 }

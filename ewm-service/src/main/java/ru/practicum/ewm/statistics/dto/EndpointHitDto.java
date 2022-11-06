@@ -22,4 +22,15 @@ public class EndpointHitDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("timestamp")
     private LocalDateTime created;
+
+    @Override
+    public String toString() {
+        return "EndpointHitDto{" +
+                "id=" + id +
+                ", app='" + app + '\'' +
+                ", uri='" + uri + '\'' +
+                ", ip='" + ip + '\'' +
+                ", created=" + created +
+                '}';
+    }
 }

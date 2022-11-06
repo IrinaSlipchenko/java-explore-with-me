@@ -8,6 +8,7 @@ import ru.practicum.ewm.event.dto.EventDtoOutputShort;
 import ru.practicum.ewm.event.dto.Sort;
 import ru.practicum.ewm.event.service.EventMapper;
 import ru.practicum.ewm.event.service.EventService;
+import ru.practicum.ewm.statistics.service.StatsServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
@@ -21,10 +22,12 @@ import java.util.List;
 public class PublicEventController {
     private final EventMapper eventMapper;
     private final EventService eventService;
+    private final StatsServiceImpl statsService;
 
     @GetMapping("/{id}")
-    public EventDtoOutput getById(@PathVariable Long id) {
+    public EventDtoOutput getById(@PathVariable Long id, HttpServletRequest request) {
 
+        statsService.setHits(request.getRequestURI(), request.getRemoteAddr());
         return eventMapper.toDto(eventService.findById(id));
     }
 
