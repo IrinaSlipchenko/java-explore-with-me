@@ -10,7 +10,7 @@ import ru.practicum.ewm.statistics.dto.ViewStatsDto;
 
 import java.util.List;
 
-@FeignClient(value = "stats", url = "${feign.client.url}")
+@FeignClient(value = "stats", url = "${feign.url}")
 public interface StatsClient {
 
     @GetMapping("/stats?start={start}&end={end}&uris={uris}&unique={unique}")
