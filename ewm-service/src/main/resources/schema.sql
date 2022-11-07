@@ -24,12 +24,12 @@ CREATE TABLE IF NOT EXISTS events
     description       VARCHAR(7000),
     created           TIMESTAMP WITHOUT TIME ZONE,
     published         TIMESTAMP WITHOUT TIME ZONE,
-    eventDate         TIMESTAMP WITHOUT TIME ZONE,
+    event_date        TIMESTAMP WITHOUT TIME ZONE,
     lat               FLOAT,
     lon               FLOAT,
     paid              BOOLEAN,
-    participantLimit  INT,
-    requestModeration BOOLEAN,
+    participant_limit INT,
+    request_moderation BOOLEAN,
     state             VARCHAR(30)
 );
 
