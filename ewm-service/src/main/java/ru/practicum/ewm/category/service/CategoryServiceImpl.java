@@ -41,7 +41,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(Long catId) {
-        // TODO Обратите внимание: с категорией не должно быть связано ни одного события.
 
         categoryRepository.deleteById(catId);
 
