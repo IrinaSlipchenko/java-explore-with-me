@@ -30,7 +30,7 @@ public class AdminCompilationController {
         try {
             Compilation compilation = compilationMapper.toCompilation(validator.validateCompilation(compilationDtoInput));
             return compilationMapper.toDto(compilationService.create(compilation));
-        }catch (ConstraintViolationException exception) {
+        } catch (ConstraintViolationException exception) {
             throw new ValidationException("title is blank ");
         }
     }

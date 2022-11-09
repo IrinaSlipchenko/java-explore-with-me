@@ -27,7 +27,7 @@ public class AdminCategoryController {
         try {
             Category category = categoryMapper.toCategory(validator.validateCategory(categoryDto));
             return categoryMapper.toDto(categoryService.create(category));
-        }catch (ConstraintViolationException exception){
+        } catch (ConstraintViolationException exception) {
             throw new ValidationException("category name is blank");
         }
     }
@@ -38,7 +38,7 @@ public class AdminCategoryController {
         try {
             Category category = categoryMapper.toCategory(validator.validateCategory(categoryDto));
             return categoryMapper.toDto(categoryService.update(category));
-        }catch (ConstraintViolationException exception){
+        } catch (ConstraintViolationException exception) {
             throw new ValidationException("category name is blank");
         }
     }

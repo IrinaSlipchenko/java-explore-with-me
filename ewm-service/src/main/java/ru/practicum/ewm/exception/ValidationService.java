@@ -17,7 +17,7 @@ public class ValidationService {
         return categoryDto;
     }
 
-    public CompilationDtoInput validateCompilation(@Valid CompilationDtoInput compilationDtoInput){
+    public CompilationDtoInput validateCompilation(@Valid CompilationDtoInput compilationDtoInput) {
         return compilationDtoInput;
     }
 }

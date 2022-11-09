@@ -29,7 +29,7 @@ public class AdminUserController {
         try {
             User user = userMapper.toUser(validator.validateUser(userDto));
             return userMapper.toDto(userService.create(user));
-        }catch (ConstraintViolationException exception){
+        } catch (ConstraintViolationException exception) {
             throw new ValidationException("user name is blank or user email is blank " +
                     "or email does not contain @");
         }

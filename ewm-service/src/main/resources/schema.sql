@@ -16,21 +16,21 @@ CREATE TABLE IF NOT EXISTS users
 
 CREATE TABLE IF NOT EXISTS events
 (
-    id                BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    initiator_id      BIGINT REFERENCES users (id),
-    category_id       BIGINT REFERENCES categories (id),
-    title             VARCHAR(120) NOT NULL,
-    annotation        VARCHAR(2000),
-    description       VARCHAR(7000),
-    created           TIMESTAMP WITHOUT TIME ZONE,
-    published         TIMESTAMP WITHOUT TIME ZONE,
-    event_date        TIMESTAMP WITHOUT TIME ZONE,
-    lat               FLOAT,
-    lon               FLOAT,
-    paid              BOOLEAN,
-    participant_limit INT,
+    id                 BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    initiator_id       BIGINT REFERENCES users (id),
+    category_id        BIGINT REFERENCES categories (id),
+    title              VARCHAR(120) NOT NULL,
+    annotation         VARCHAR(2000),
+    description        VARCHAR(7000),
+    created            TIMESTAMP WITHOUT TIME ZONE,
+    published          TIMESTAMP WITHOUT TIME ZONE,
+    event_date         TIMESTAMP WITHOUT TIME ZONE,
+    lat                FLOAT,
+    lon                FLOAT,
+    paid               BOOLEAN,
+    participant_limit  INT,
     request_moderation BOOLEAN,
-    state             VARCHAR(30)
+    state              VARCHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS requests
