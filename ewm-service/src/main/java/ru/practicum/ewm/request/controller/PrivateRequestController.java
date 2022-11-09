@@ -33,14 +33,14 @@ public class PrivateRequestController {
 
     @GetMapping
     public List<ParticipationRequestDto> getRequestsByUser(@PathVariable Long userId) {
-
+        log.info("User requests for participation in other people's events, userId={}", userId);
         return requestMapper.toRequestDto(requestService.getRequestsByUser(userId));
     }
 
     @PatchMapping("/{requestId}/cancel")
     public ParticipationRequestDto cancelRequest(@PathVariable Long userId,
                                                  @PathVariable Long requestId) {
-
+        log.info("Cancel your event request userId={}, requestId={}", userId, requestId);
         return requestMapper.toRequestDto(requestService.cancelRequest(userId, requestId));
     }
 }

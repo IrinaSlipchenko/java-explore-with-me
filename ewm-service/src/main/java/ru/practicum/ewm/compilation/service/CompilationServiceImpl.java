@@ -15,20 +15,23 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class CompilationServiceImpl {
+public class CompilationServiceImpl implements CompilationService {
 
     private final CompilationRepository compilationRepository;
     private final EventFactory eventFactory;
 
+    @Override
     public Compilation create(Compilation compilation) {
         return compilationRepository.save(compilation);
     }
 
+    @Override
     public void delete(Long compId) {
         Compilation compilation = getById(compId);
         compilationRepository.delete(compilation);
     }
 
+    @Override
     public void addEventInCompilation(Long compId, Long eventId) {
         Compilation compilation = getById(compId);
 
@@ -38,6 +41,7 @@ public class CompilationServiceImpl {
         compilationRepository.save(compilation);
     }
 
+    @Override
     public void delEventFromCompilation(Long compId, Long eventId) {
         Compilation compilation = getById(compId);
 
@@ -47,23 +51,20 @@ public class CompilationServiceImpl {
         compilationRepository.save(compilation);
     }
 
-    public void attachedFromMain(Long compId) {
+    @Override
+    public void changePin(Long compId, Boolean pinned) {
         Compilation compilation = getById(compId);
-        compilation.setPinned(true);
+        compilation.setPinned(pinned);
         compilationRepository.save(compilation);
     }
 
-    public void releasedFromMain(Long compId) {
-        Compilation compilation = getById(compId);
-        compilation.setPinned(false);
-        compilationRepository.save(compilation);
-    }
-
+    @Override
     public Compilation getById(Long compId) {
         return compilationRepository.findById(compId)
                 .orElseThrow(() -> new NotFoundException("compilation not found id= " + compId));
     }
 
+    @Override
     public List<Compilation> getCompilations(Boolean pinned, Integer from, Integer size) {
         Pageable pageable = OffsetLimitPageable.of(from, size);
 

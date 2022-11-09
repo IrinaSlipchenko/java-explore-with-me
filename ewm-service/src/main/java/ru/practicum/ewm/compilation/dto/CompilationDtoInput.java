@@ -17,7 +17,6 @@ public class CompilationDtoInput {
     @NotBlank
     private String title;
     private Boolean pinned;  // Закреплена ли подборка на главной странице сайта
-    @NotNull
     private Set<Long> events;
 
 }

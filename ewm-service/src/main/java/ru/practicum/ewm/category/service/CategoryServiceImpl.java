@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category create(Category category) {
-        return save(category);
+        return saveOrElseThrow(category);
     }
 
     @Override
@@ -28,16 +28,15 @@ public class CategoryServiceImpl implements CategoryService {
         Category oldCategory = getById(category.getId());
 
         categoryMapper.update(category, oldCategory);
-        return save(oldCategory);
+        return saveOrElseThrow(oldCategory);
     }
 
-    private Category save(Category category) {
+    private Category saveOrElseThrow(Category category) {
         try {
             return categoryRepository.save(category);
         } catch (DataIntegrityViolationException ex) {
             throw new ConflictException("Category name already in use", "name = " + category.getName());
         }
-
     }
 
     @Override
