@@ -2,7 +2,7 @@
 Explore With Me — приложение, которое дает возможность делиться информацией об интересных событиях
 и помогает найти компанию для участия в них.
 
-[Ссылка на пул реквест](https://github.com/IrinaSlipchenko/java-explore-with-me/pull/2)
+[Link to Pull requests](https://github.com/IrinaSlipchenko/java-explore-with-me/pull/2)
 
 #### Запуск приложения   
 (Требуется установленный Docker)   

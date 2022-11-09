@@ -1,6 +1,7 @@
 package ru.practicum.ewm.request.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.request.dto.ParticipationRequestDto;
 import ru.practicum.ewm.request.model.ParticipationRequest;
@@ -9,6 +10,7 @@ import ru.practicum.ewm.request.service.RequestServiceImpl;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users/{userId}/requests")
 @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class PrivateRequestController {
     @PostMapping
     public ParticipationRequestDto create(@PathVariable Long userId,
                                           @RequestParam("eventId") Long eventId) {
-
+        log.info("Creating participation request userId={}, eventId={}", userId, eventId);
         ParticipationRequest request = requestMapper.toRequest(userId, eventId);
         return requestMapper.toRequestDto(requestService.create(request));
     }
