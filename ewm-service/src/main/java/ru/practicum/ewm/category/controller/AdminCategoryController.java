@@ -7,10 +7,8 @@ import ru.practicum.ewm.category.dto.CategoryDto;
 import ru.practicum.ewm.category.model.Category;
 import ru.practicum.ewm.category.service.CategoryMapper;
 import ru.practicum.ewm.category.service.CategoryService;
-import ru.practicum.ewm.exception.ValidationException;
-import ru.practicum.ewm.exception.ValidationService;
 
-import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -19,28 +17,21 @@ import javax.validation.ConstraintViolationException;
 public class AdminCategoryController {
     private final CategoryMapper categoryMapper;
     private final CategoryService categoryService;
-    private final ValidationService validator;
 
     @PostMapping
-    public CategoryDto create(@RequestBody CategoryDto categoryDto) {
+    public CategoryDto create(@Valid @RequestBody CategoryDto categoryDto) {
         log.info("create category {}", categoryDto);
-        try {
-            Category category = categoryMapper.toCategory(validator.validateCategory(categoryDto));
-            return categoryMapper.toDto(categoryService.create(category));
-        } catch (ConstraintViolationException exception) {
-            throw new ValidationException("category name is blank");
-        }
+
+        Category category = categoryMapper.toCategory(categoryDto);
+        return categoryMapper.toDto(categoryService.create(category));
     }
 
     @PatchMapping
-    public CategoryDto update(@RequestBody CategoryDto categoryDto) {
+    public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto) {
         log.info("update category {}", categoryDto);
-        try {
-            Category category = categoryMapper.toCategory(validator.validateCategory(categoryDto));
-            return categoryMapper.toDto(categoryService.update(category));
-        } catch (ConstraintViolationException exception) {
-            throw new ValidationException("category name is blank");
-        }
+
+        Category category = categoryMapper.toCategory(categoryDto);
+        return categoryMapper.toDto(categoryService.update(category));
     }
 
     @DeleteMapping("/{catId}")

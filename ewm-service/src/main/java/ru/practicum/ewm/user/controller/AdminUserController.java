@@ -3,14 +3,12 @@ package ru.practicum.ewm.user.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.exception.ValidationException;
-import ru.practicum.ewm.exception.ValidationService;
 import ru.practicum.ewm.user.dto.UserDto;
 import ru.practicum.ewm.user.model.User;
 import ru.practicum.ewm.user.service.UserMapper;
 import ru.practicum.ewm.user.service.UserService;
 
-import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -21,18 +19,13 @@ public class AdminUserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
-    private final ValidationService validator;
 
     @PostMapping
-    public UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
         log.info("create user {}", userDto);
-        try {
-            User user = userMapper.toUser(validator.validateUser(userDto));
-            return userMapper.toDto(userService.create(user));
-        } catch (ConstraintViolationException exception) {
-            throw new ValidationException("user name is blank or user email is blank " +
-                    "or email does not contain @");
-        }
+
+        User user = userMapper.toUser(userDto);
+        return userMapper.toDto(userService.create(user));
     }
 
     @GetMapping

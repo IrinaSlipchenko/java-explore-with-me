@@ -38,4 +38,15 @@ public class EndpointHit {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "EndpointHit{" +
+                "id=" + id +
+                ", app='" + app + '\'' +
+                ", uri='" + uri + '\'' +
+                ", ip='" + ip + '\'' +
+                ", created=" + created +
+                '}';
+    }
 }

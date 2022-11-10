@@ -1,6 +1,7 @@
 package ru.practicum.ewm.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -47,5 +48,15 @@ public class ExceptionHandlerController {
                 .build();
     }
 
-
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto handleIsBlankException(MethodArgumentNotValidException ex) {
+        return ErrorDto.builder()
+                .errors(new ArrayList<>())
+                .message(ex.getMessage())
+                .reason("")
+                .status(HttpStatus.BAD_REQUEST)
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 }

@@ -1,6 +1,7 @@
 package ru.practicum.ewm.event.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.event.dto.EventDtoOutput;
@@ -16,6 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class PublicEventController {
     @GetMapping("/{id}")
     public EventDtoOutput getById(@PathVariable Long id, HttpServletRequest request) {
 
+        log.info("get event by id={}, requestURI={}, remoteAddr={}", id, request.getRequestURI(), request.getRemoteAddr());
         statsService.setHits(request.getRequestURI(), request.getRemoteAddr());
         return eventMapper.toDto(eventService.findById(id));
     }
@@ -46,6 +49,11 @@ public class PublicEventController {
                                                @RequestParam(defaultValue = "false") Boolean onlyAvailable,
                                                @RequestParam(required = false) Boolean paid,
                                                @RequestParam(required = false) String text) {
+
+        log.info("get short public info about all events, categories={}, rangeStart={}," +
+                        "rangeEnd={}, from={}, size={}, sort={}, onlyAvailable={}, paid={}, text={}",
+                categories, rangeStart, rangeEnd, from, size, sort, onlyAvailable, paid, text);
+
         return eventMapper.toDtoShort(
                 eventService.getEventByParameters(null, null, categories, rangeStart, rangeEnd,
                         from, size, sort, onlyAvailable, paid, text));

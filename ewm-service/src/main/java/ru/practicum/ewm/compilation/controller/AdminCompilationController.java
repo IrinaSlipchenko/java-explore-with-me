@@ -8,10 +8,8 @@ import ru.practicum.ewm.compilation.dto.CompilationDtoOutput;
 import ru.practicum.ewm.compilation.model.Compilation;
 import ru.practicum.ewm.compilation.service.CompilationMapper;
 import ru.practicum.ewm.compilation.service.CompilationService;
-import ru.practicum.ewm.exception.ValidationException;
-import ru.practicum.ewm.exception.ValidationService;
 
-import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 
 @Slf4j
@@ -22,17 +20,13 @@ public class AdminCompilationController {
     private final CompilationMapper compilationMapper;
     private final CompilationService compilationService;
 
-    private final ValidationService validator;
 
     @PostMapping
-    public CompilationDtoOutput create(@RequestBody CompilationDtoInput compilationDtoInput) {
+    public CompilationDtoOutput create(@Valid @RequestBody CompilationDtoInput compilationDtoInput) {
         log.info("create compilation {}", compilationDtoInput);
-        try {
-            Compilation compilation = compilationMapper.toCompilation(validator.validateCompilation(compilationDtoInput));
-            return compilationMapper.toDto(compilationService.create(compilation));
-        } catch (ConstraintViolationException exception) {
-            throw new ValidationException("title is blank ");
-        }
+
+        Compilation compilation = compilationMapper.toCompilation(compilationDtoInput);
+        return compilationMapper.toDto(compilationService.create(compilation));
     }
 
     @DeleteMapping("/{compId}")
