@@ -16,16 +16,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventDtoInput {
-    @NotNull
-    @Size(min = 3, max = 120)
+    @NotNull(message = "title is null")
+    @Size(min = 3, max = 120, message = "3 < title < 120")
     private String title;    //         // 3 <= Length <= 120
     @JsonProperty("category")
     private Long categoryId;    //     // id категории к которой относится событие
-    @NotNull
-    @Size(min = 20, max = 2000)
+    @NotNull(message = "annotation is null")
+    @Size(min = 20, max = 2000, message = "20 < annotation < 2000")
     private String annotation; //      // Краткое описание события 20 <= Length <= 2000
-    @NotNull
-    @Size(min = 20, max = 7000)
+
+    @NotNull(message = "description is null")
+    @Size(min = 20, max = 7000, message = "20 < description < 7000")
     private String description; //     // Полное описание события 20 <= Length <= 7000
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate;// // в формате "yyyy-MM-dd HH:mm:ss", на которые намечено событие

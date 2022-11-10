@@ -53,7 +53,7 @@ public class ExceptionHandlerController {
     public ErrorDto handleIsBlankException(MethodArgumentNotValidException ex) {
         return ErrorDto.builder()
                 .errors(new ArrayList<>())
-                .message(ex.getMessage())
+                .message(ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage())
                 .reason("")
                 .status(HttpStatus.BAD_REQUEST)
                 .timestamp(LocalDateTime.now())

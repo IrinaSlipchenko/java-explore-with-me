@@ -14,10 +14,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class UserDto {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "name is blank")
     private String name;
-    @Email
-    @NotBlank
+    @Email(message = "invalid email")
+    @NotBlank(message = "email is blank")
     private String email;
 
     @Override

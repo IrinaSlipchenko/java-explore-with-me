@@ -57,7 +57,7 @@ public class RequestServiceImpl {
         if (event.getInitiator().getId().equals(userId)) {
             return requestRepository.findAllByEvent(event);
         }
-        throw new ValidationException("only the initiator can view information" +
+        throw new ValidationException("only the initiator can view info " +
                 "about requests to participate in the event");
     }
 

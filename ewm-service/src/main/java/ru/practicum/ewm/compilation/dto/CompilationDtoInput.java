@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompilationDtoInput {
-    @NotBlank
+    @NotBlank(message = "title is blank")
     private String title;
     private Boolean pinned;  // Закреплена ли подборка на главной странице сайта
     private Set<Long> events;

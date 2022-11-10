@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CategoryDto {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "name is blank")
     private String name;
 
     @Override
