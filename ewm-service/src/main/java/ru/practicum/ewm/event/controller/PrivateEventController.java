@@ -11,7 +11,7 @@ import ru.practicum.ewm.event.service.EventMapper;
 import ru.practicum.ewm.event.service.EventService;
 import ru.practicum.ewm.request.dto.ParticipationRequestDto;
 import ru.practicum.ewm.request.service.RequestMapper;
-import ru.practicum.ewm.request.service.RequestServiceImpl;
+import ru.practicum.ewm.request.service.RequestService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,7 +24,7 @@ public class PrivateEventController {
     private final EventMapper eventMapper;
     private final EventService eventService;
     private final RequestMapper requestMapper;
-    private final RequestServiceImpl requestService;
+    private final RequestService requestService;
 
 
     @PostMapping

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.request.dto.ParticipationRequestDto;
 import ru.practicum.ewm.request.model.ParticipationRequest;
 import ru.practicum.ewm.request.service.RequestMapper;
-import ru.practicum.ewm.request.service.RequestServiceImpl;
+import ru.practicum.ewm.request.service.RequestService;
 
 import java.util.List;
 
@@ -17,8 +17,7 @@ import java.util.List;
 public class PrivateRequestController {
 
     private final RequestMapper requestMapper;
-
-    private final RequestServiceImpl requestService;
+    private final RequestService requestService;
 
     // Может ли пользователь отменить заявку на участие в событии,
     // которую уже подтвердил инициатор?

@@ -18,11 +18,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RequestServiceImpl {
+public class RequestServiceImpl implements RequestService {
     private final RequestRepository requestRepository;
     private final UserService userService;
     private final EventService eventService;
 
+    @Override
     public ParticipationRequest create(ParticipationRequest request) {
 
         if (!request.getEvent().getState().equals(State.PUBLISHED)) {
@@ -46,12 +47,14 @@ public class RequestServiceImpl {
         return requestRepository.save(request);
     }
 
+    @Override
     public List<ParticipationRequest> getRequestsByUser(Long userId) {
         User user = userService.getById(userId);
 
         return requestRepository.findAllByRequester(user);
     }
 
+    @Override
     public List<ParticipationRequest> getRequests(Long userId, Long eventId) {
         Event event = eventService.findById(eventId);
         if (event.getInitiator().getId().equals(userId)) {
@@ -61,6 +64,7 @@ public class RequestServiceImpl {
                 "about requests to participate in the event");
     }
 
+    @Override
     public ParticipationRequest cancelRequest(Long userId, Long requestId) {
         ParticipationRequest request = getById(requestId);
 
@@ -71,6 +75,7 @@ public class RequestServiceImpl {
         throw new ConflictException("request can only be canceled by its creator", "");
     }
 
+    @Override
     public ParticipationRequest confirmed(Long userId, Long eventId, Long reqId) {
         ParticipationRequest request = getById(reqId);
         Event event = request.getEvent();
@@ -83,6 +88,7 @@ public class RequestServiceImpl {
         throw new ConflictException("the request has the right to confirm the event creator", "");
     }
 
+    @Override
     public ParticipationRequest rejected(Long userId, Long eventId, Long reqId) {
         ParticipationRequest request = getById(reqId);
         Event event = request.getEvent();
