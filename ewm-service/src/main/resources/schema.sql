@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS categories, users, events, requests, compilations, compilations_events;
+DROP TABLE IF EXISTS categories, users, events, requests, compilations, compilations_events, friends;
 
 CREATE TABLE IF NOT EXISTS categories
 (
@@ -54,4 +54,10 @@ CREATE TABLE IF NOT EXISTS compilations_events
 (
     event_id        BIGINT REFERENCES events (id),
     compilations_id BIGINT REFERENCES compilations (id)
+);
+
+CREATE TABLE IF NOT EXISTS friends
+(
+    user_id   BIGINT REFERENCES users (id),
+    friend_id BIGINT REFERENCES users (id)
 );
