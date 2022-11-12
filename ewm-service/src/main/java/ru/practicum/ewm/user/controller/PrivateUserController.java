@@ -36,12 +36,14 @@ public class PrivateUserController {
     @GetMapping
     public List<UserShortDto> allMyFriends(@PathVariable Long userId) {
 
+        log.info("get all my friends, userId={}", userId);
         return userMapper.toShortDto(userService.allMyFriends(userId));
     }
 
     @GetMapping("/events")
     public List<EventDtoOutputShort> eventsFriends(@PathVariable Long userId) {
 
+        log.info("get events my friends, userId={}", userId);
         return eventMapper.toDtoShort(userService.eventsFriends(userId));
     }
 }

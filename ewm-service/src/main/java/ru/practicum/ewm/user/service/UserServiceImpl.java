@@ -87,11 +87,6 @@ public class UserServiceImpl implements UserService {
         return new ArrayList<>(user.getFriends());
     }
 
-//    @Override
-//    public List<User> commonFriends(Long userId, Long otherId) {
-//        return null;
-//    }
-
     @Override
     public List<Event> eventsFriends(Long userId) {
         List<User> myFriends = allMyFriends(userId);
