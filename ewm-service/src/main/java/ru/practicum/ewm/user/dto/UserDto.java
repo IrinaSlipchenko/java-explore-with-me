@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,6 +21,8 @@ public class UserDto {
     @Email(message = "invalid email")
     @NotBlank(message = "email is blank")
     private String email;
+
+    private Set<Long> friendsId = new HashSet<>();
 
     @Override
     public String toString() {
